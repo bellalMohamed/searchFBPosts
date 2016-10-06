@@ -1,0 +1,31 @@
+<div class="container">
+	<button ng-click="login()" class="btn btn-primary" ng-if="isLoggedIn == false">Login</button>
+
+	<input type="text" ng-model="query" class="search__input" placeholder="Search by content">
+	<div ng-repeat="collectOfPosts in allPosts">
+		<div class="row">
+			<div class="col s12 m6 l4" ng-repeat="post in collectOfPosts | filter:query">
+				<div class="card small">
+					<div class="card-image" ng-if="post.full_picture">
+						<img ng-src="{{ post.full_picture }}">
+					</div>
+					<div class="card-image" ng-if="!post.full_picture">
+						<img ng-src="http://placehold.it/200?text=no iamge">
+					</div>
+					<div class="card-content" ng-if="post.message">
+						<p>{{ post.message }}</p>
+					</div>
+
+					<div class="card-content" ng-if="!post.message">
+						<p>This Post has no content</p>
+					</div>
+
+					<div class="card-action">
+						<a ng-href="{{ post.permalink_url }}" target="_blank">Post Link</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button ng-click="next()" class="btn load__btn">Load All Posts</button>
+</div>
